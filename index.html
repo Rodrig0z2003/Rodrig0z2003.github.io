@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Página Personal</title>
+    <link href="tarea3.css" rel="stylesheet"/>
+    <style>
+       
+        .image-gallery img {
+            width: 100px;
+            height: 100px;
+            margin: 10px;
+            cursor: pointer;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .image-gallery img:hover {
+            transform: scale(1.1);
+        }
+    </style>
+    </head>
+<body>
+    <header>
+        <img src="https://cdn-icons-png.flaticon.com/512/1995/1995515.png" alt="Mi Fotografía" width="100px" >
+        <h1>Sandro Rodrigo Capira Gonzales</h1>
+        <p>Desarrollador Web</p>
+    </header>
+    <div class="container">
+        <h2>Presentación Personal</h2>
+        <p>Hola, soy Sandro Rodrigo Capira Gonzales . Bienvenido a mi página personal. Aquí encontrarás información sobre mí y mis intereses.</p>
+
+        <h2 onclick="toggleSubtitle('subtitle1')">Sobre Mí</h2>
+        <p id="subtitle1" style="display: none;">Me apasiona la programación y la tecnología. En mi tiempo libre, disfruto de leer, jugar videojuegos. También soy un fanático de la música clásica.</p>
+
+        <h2 onclick="toggleSubtitle('subtitle2')">Tecnologías y Lenguajes de Programación</h2>
+        <p id="subtitle2" style="display: none;">He aprendido algunos lenguajes de programación, incluyendo HTML, CSS, Python y Java.</p>
+        <div class="image-gallery">
+            <img src="https://cdn.pixabay.com/photo/2017/08/05/11/16/logo-2582748_1280.png" alt="Imagen 1" onclick="showImage('imagen1.jpg')">
+            <img src="https://static.vecteezy.com/system/resources/previews/022/100/210/original/java-logo-transparent-free-png.png" alt="Imagen 2" onclick="showImage('imagen2.jpg')">
+            <img src="https://logos-world.net/wp-content/uploads/2021/10/Python-Logo-700x394.png" alt="Imagen 3" onclick="showImage('imagen3.jpg')">
+        </div>
+    
+        <div id="image-modal" style="display: none;">
+            <img id="modal-image" src="" alt="Imagen en modal">
+        </div>
+        <h2 onclick="toggleSubtitle('subtitle3')">Formación Profesional</h2>
+        <p id="subtitle3" style="display: none;">Estoy cursando la carrera de Diseño y Desarrollo de software en Tecsup y he participado en varios cursos y proyectos de desarrollo web para mejorar mis habilidades.</p>
+
+        <h2 onclick="toggleSubtitle('subtitle4')">Idiomas</h2>
+        <p id="subtitle4" style="display: none;">Hablo español e inglés intermedio, lo que me permite trabajar en proyectos internacionales y comunicarme con personas de diferentes partes del mundo.</p>
+    </div>
+  
+    <script>
+        function toggleSubtitle(subtitleId) {
+            const subtitle = document.getElementById(subtitleId);
+            if (subtitle.style.display === 'none' || subtitle.style.display === '') {
+                subtitle.style.display = 'block';
+            } else {
+                subtitle.style.display = 'none';
+            }
+        }
+
+        function showImage(imageSrc) {
+            const modal = document.getElementById('image-modal');
+            const modalImage = document.getElementById('modal-image');
+            modalImage.src = imageSrc;
+            modal.style.display = 'block';
+        }
+    </script>
+    <button onclick="toggleAllSubtitles()">Mostrar/Ocultar Subtítulos</button>
+
+<script>
+    function toggleAllSubtitles() {
+        const subtitles = document.querySelectorAll('p[id^="subtitle"]');
+        subtitles.forEach(subtitle => {
+            if (subtitle.style.display === 'none' || subtitle.style.display === '') {
+                subtitle.style.display = 'block';
+            } else {
+                subtitle.style.display = 'none';
+            }
+        });
+    }
+</script>
+<button onclick="changeBackgroundColor()">Cambiar Color de Fondo</button>
+
+<script>
+    function changeBackgroundColor() {
+        const colors = ["#FF5733", "#33FF57", "#5733FF", "#FFFF33", "#33FFFF"];
+        const randomColor = colors[Math.floor(Math.random() * colors.length)];
+        document.body.style.backgroundColor = randomColor;
+    }
+</script>
+<p>Contador de Visitas: <span id="visitCounter">0</span></p>
+
+<script>
+    // Verifica si el contador ya existe en el almacenamiento local.
+    if (localStorage.getItem("visitCount") === null) {
+        // Si no existe, crea el contador y configúralo en 0.
+        localStorage.setItem("visitCount", 0);
+    }
+
+    // Obtiene el contador actual del almacenamiento local y lo muestra en la página.
+    const visitCounter = document.getElementById("visitCounter");
+    visitCounter.textContent = localStorage.getItem("visitCount");
+
+    // Incrementa el contador cada vez que alguien visita la página.
+    const currentCount = parseInt(localStorage.getItem("visitCount"), 10);
+    localStorage.setItem("visitCount", currentCount + 1);
+</script>
+
+</body>
+</html>
